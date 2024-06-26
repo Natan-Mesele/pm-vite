@@ -18,7 +18,7 @@ import { store } from "@/Redux/Store";
 
 export const tags = [
   "all",
-  "React",
+  "react",
   "Nextjs",
   "Spring boot",
   "mysql",
