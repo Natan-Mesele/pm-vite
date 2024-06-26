@@ -43,7 +43,8 @@ export const fetchProjects =
     try {
       const { data } = await api.post("/api/projects", projectData);
       console.log("create projects", data);
-      dispatch({ type: CREATE_PROJECT_SUCCESS, projects: data });
+      dispatch({ type: CREATE_PROJECT_SUCCESS, project: data });
+      
     } catch (error) {
       console.log("error", error);
     }

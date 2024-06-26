@@ -17,14 +17,14 @@ import { fetchProjects, searchProjects } from "@/Redux/Project/Action";
 import { store } from "@/Redux/Store";
 
 export const tags = [
-  "All",
+  "all",
   "React",
   "Nextjs",
   "Spring boot",
   "mysql",
   "Angular",
   "Python",
-  "flask",
+  "Flask",
   "Vue",
 ];
 function ProjectList() {
@@ -103,7 +103,7 @@ function ProjectList() {
                   <div className="pt-5">
                     <RadioGroup
                       className="space-y-3 pt-5"
-                      defaultValue="all"
+                      defaultValue="All"
                       onValueChange={(value) =>
                         handleFilterTags(value)
                       }

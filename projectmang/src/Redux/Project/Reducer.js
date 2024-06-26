@@ -56,6 +56,7 @@ export const projectReducer = (state = initialState, action) => {
         projects: [...state.projects, action.project],
         error: null,
       };
+      
     case FETCH_PROJECT_BY_ID_SUCCESS:
       return {
         ...state,
@@ -72,7 +73,7 @@ export const projectReducer = (state = initialState, action) => {
         ),
         error: null,
       };
-
+      
     default:
       return state;
   }
