@@ -16,12 +16,16 @@ function IssueList({title, status}) {
     const {id} = useParams();
 
     useEffect(()=> {
-        dispatch(fetchIssues(id))
-    }, [id])
+        dispatch(fetchIssues(id));
+        console.log('Fetching issues for project:', id);
+    }, [id, dispatch]);
+
+    console.log('Issue state:', issue);
+
   return (
     <div>
         <Dialog>
-            <Card className="w-full md:w-[300px] lg:w-[300px]">
+            <Card className="w-full md:w-[300px] lg:w-[310px]">
                 <CardHeader>
                     <CardTitle>
                         {title}
@@ -29,7 +33,8 @@ function IssueList({title, status}) {
                 </CardHeader>
                 <CardContent className="px-2">
                     <div className='space-y-2'>
-                        {issue.issues.filter((issue=>issue.status===status)).map((item)=><IssueCard projectId={id} item={item} key={item.id} />)}
+                        {[1,1,1].map((item) => 
+                        <IssueCard key={item}/>)}
                     </div>
                 </CardContent>
                 <CardFooter>

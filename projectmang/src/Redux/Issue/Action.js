@@ -84,7 +84,7 @@ export const createIssue = (issueData) => {
             const response = await api.post("/api/issues", issueData);
             dispatch({
                 type: actionTypes.CREATE_ISSUE_SUCCESS,
-                isssue: response.data,
+                issue: response.data, 
             });
             console.log("issue created successfully", response.data);
         } catch (error) {

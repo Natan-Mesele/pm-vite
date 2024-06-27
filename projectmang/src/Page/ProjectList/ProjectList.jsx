@@ -27,6 +27,7 @@ export const tags = [
   "Flask",
   "Vue",
 ];
+
 function ProjectList() {
   const [keyword, setKeyword] = useState("");
   const { project } = useSelector(store => store);

@@ -18,13 +18,18 @@ const issueReducer = (state = initialState, action) => {
         loading: true,
         error: null,
       };
+    case actionTypes.FETCH_ISSUES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        issues: action.issues,
+      };
     case actionTypes.FETCH_ISSUES_BY_ID_SUCCESS:
       return {
         ...state,
         loading: false,
-        issues: action.issue,
+        issueDetails: action.issues,
       };
-    case actionTypes.FETCH_ISSUES_BY_ID_SUCCESS:
     case actionTypes.UPDATE_ISSUE_STATUS_SUCCESS:
       return {
         ...state,
@@ -35,7 +40,7 @@ const issueReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        issues: [...state.issues, action.issue],
+        issues: [...state.issues, action.issue], // use `action.issue` here
       };
     case actionTypes.ASSIGNED_ISSUE_TO_USER_SUCCESS:
       return {
