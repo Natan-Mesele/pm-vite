@@ -95,3 +95,13 @@ export const createIssue = (issueData) => {
         }
     };
 };
+
+export const deleteIssue = (issueId) => async (dispatch) => {
+    dispatch({ type: actionTypes.DELETE_ISSUE_REQUEST });
+    try {
+        await api.delete(`/api/issues/${issueId}`);
+        dispatch({ type: actionTypes.DELETE_ISSUE_SUCCESS, issueId });
+    } catch (error) {
+        dispatch({ type: actionTypes.DELETE_ISSUE_FAILURE, error: error.message });
+    }
+};
