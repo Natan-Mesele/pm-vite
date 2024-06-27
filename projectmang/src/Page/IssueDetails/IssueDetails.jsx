@@ -1,31 +1,41 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CreateCommentForm from "./CreateCommentForm";
 import CommentCard from "./CommentCard";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchIssueById } from "@/Redux/Issue/Action";
+import { store } from "@/Redux/Store";
 
 function IssueDetails() {
   const { projectId, issueId } = useParams();
+  const dispatch = useDispatch();
+  const {issue} = useSelector(store => store)
 
   const handleUpdateIssueStatus = (status) => {
     console.log(status);
-  }
+  };
+
+  useEffect(()=> {
+    dispatch(fetchIssueById(issueId));
+  }, [issueId, dispatch]);
+
   return (
     <div className="px-20 py-8 text-gray-400 text-left">
       <div className="flex justify-between border p-10 rounded-lg">
         <ScrollArea className="h-[80vh] w-[60%]">
           <div>
             <h1 className="text-lg font-semibold text-gray-400">
-              Create Navbar
+              {issue.issueDetails?.title}
             </h1>
             <div className="py-5">
               <h2 className="font-semibold text-gray-400">Description</h2>
               <p className="text-gray-400 text-sm mt-3">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              {issue.issueDetails?.description}
               </p>
             </div>
             <div className="mt-5">

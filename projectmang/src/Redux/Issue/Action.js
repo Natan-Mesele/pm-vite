@@ -28,7 +28,7 @@ export const fetchIssueById = (id) => {
             console.log("fetch issues by id", response.data);
             dispatch({
                 type: actionTypes.FETCH_ISSUES_BY_ID_SUCCESS,
-                isssues: response.data,
+                issues: response.data,
             });
         } catch (error) {
             dispatch({
@@ -47,7 +47,7 @@ export const updateIssueStatus = ({id, status}) => {
             console.log("update issue status", response.data);
             dispatch({
                 type: actionTypes.UPDATE_ISSUE_STATUS_SUCCESS,
-                isssues: response.data,
+                issues: response.data,
             });
         } catch (error) {
             dispatch({
@@ -66,7 +66,7 @@ export const assignedUserToIssue = ({issueId, userId}) => {
             console.log("assigned issue --- ", response.data);
             dispatch({
                 type: actionTypes.ASSIGNED_ISSUE_TO_USER_SUCCESS,
-                isssues: response.data,
+                issues: response.data,
             });
         } catch (error) {
             dispatch({
