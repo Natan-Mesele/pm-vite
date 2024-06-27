@@ -59,7 +59,7 @@ function IssueCard({item, projectId}) {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <UserList/>
+                <UserList issueDetails={item}/>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

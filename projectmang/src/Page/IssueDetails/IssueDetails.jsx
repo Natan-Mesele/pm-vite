@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchIssueById } from "@/Redux/Issue/Action";
+import { fetchIssueById, updateIssueStatus } from "@/Redux/Issue/Action";
 import { store } from "@/Redux/Store";
 
 function IssueDetails() {
@@ -17,6 +17,7 @@ function IssueDetails() {
   const {issue} = useSelector(store => store)
 
   const handleUpdateIssueStatus = (status) => {
+    dispatch(updateIssueStatus({status, id:issueId}))
     console.log(status);
   };
 
@@ -84,14 +85,17 @@ function IssueDetails() {
               <div className="space-y-7">
                   <div className="flex gap-10 items-center">
                     <p className="w-[7rem]">Assignee</p>
+                    {issue.issueDetails?.assignee? 
                     <div className="flex items-center gap-3">
                       <Avatar className="h-8 w-8 text-xs">
                         <AvatarFallback>
-                          Z
+                        {issue.issueDetails?.assignee?.fullName[0]}
                         </AvatarFallback>
                       </Avatar>
-                      <p>code with zosh</p>
-                    </div>
+                      <p>{issue.issueDetails?.assignee?.fullName}</p>
+                    </div>: <p>unassigned</p>
+                    }
+                    
                   </div>
                   <div className="flex gap-10 items-center">
                     <p className="w-[7rem]">Labels</p>
@@ -100,7 +104,7 @@ function IssueDetails() {
                   <div className="flex gap-10 items-center">
                     <p className="w-[7rem]">Status</p>
                     <Badge>
-                      In_Progress
+                    {issue.issueDetails?.status}
                     </Badge>
                   </div>
                   <div className="flex gap-10 items-center">
