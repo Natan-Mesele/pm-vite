@@ -33,8 +33,8 @@ function IssueList({title, status}) {
                 </CardHeader>
                 <CardContent className="px-2">
                     <div className='space-y-2'>
-                        {[1,1,1].map((item) => 
-                        <IssueCard key={item}/>)}
+                        {issue.issues.map((item) => 
+                        <IssueCard projectId={id} item={item} key={item.id}/>)}
                     </div>
                 </CardContent>
                 <CardFooter>

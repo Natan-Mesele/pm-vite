@@ -13,13 +13,13 @@ import React from "react";
 import UserList from "./UserList";
 import { useNavigate } from "react-router-dom";
 
-function IssueCard() {
+function IssueCard({item, projectId}) {
   const navigate = useNavigate()
   return (
     <Card className="rounded-md py-1 pb-2">
       <CardHeader className="py-0 pb">
         <div className="flex justify-between items-center">
-          <CardTitle className="cursor-pointer" onClick={()=>navigate("/project/3/issue/10")}>Create Navbar</CardTitle>
+          <CardTitle className="cursor-pointer" onClick={()=>navigate(`/project/${projectId}/issue/${item.id}`)}>{item.title}</CardTitle>
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Button className="rounded-full" size="icon" variant="ghost">
