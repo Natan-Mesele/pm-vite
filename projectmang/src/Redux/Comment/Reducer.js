@@ -20,7 +20,7 @@ const commentReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        comments: [...state.comments, action.comment],
+        comments: Array.isArray(state.comments) ? [...state.comments, action.comment] : [action.comment],
       };
     case actionTypes.DELETE_COMMENT_SUCCESS:
       return {
