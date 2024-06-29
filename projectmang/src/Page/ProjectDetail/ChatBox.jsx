@@ -15,13 +15,13 @@ function ChatBox() {
   const {auth, chat} = useSelector(store=>store)
   const {id} = useParams();
 
-  useEffect(()=> {
-    dispatch(fetchChatByProject(id))
-  }, [])
+  useEffect(() => {
+    dispatch(fetchChatByProject(id));
+  }, [dispatch, id]);
 
-  useEffect(()=> {
-    dispatch(fetchChatMessages(chat.chat?.id))
-  }, [])
+  useEffect(() => {
+    dispatch(fetchChatMessages(chat.chat?.id));
+  }, [dispatch, chat.chat?.id]);
 
   const handleSendMessage = () => {
     dispatch(sendMessage({
@@ -29,7 +29,7 @@ function ChatBox() {
       projectId: id,
       content: message
     }));
-    sendMessage(" ");
+    setMessage("");  // Corrected line to clear the input field
     console.log("message", message);
   };
 
