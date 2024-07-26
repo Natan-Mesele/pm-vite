@@ -30,7 +30,7 @@ export const tags = [
 
 function ProjectList() {
   const [keyword, setKeyword] = useState("");
-  const { project } = useSelector(store => store);
+  const  project  = useSelector((store) => store.project);
   const dispatch = useDispatch()
 
   const handleFilterCategory = (value) => {
