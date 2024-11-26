@@ -21,79 +21,112 @@ import { store } from "@/Redux/Store";
 
 function ProjectDetails() {
   const dispatch = useDispatch();
-  const {project} = useSelector(store=>store)
-  const {id} = useParams();
-  const handleProjectInvitation = () => {};
+  const { project } = useSelector((store) => store);
+  const { id } = useParams();
+  const handleProjectInvitation = () => { };
 
-  useEffect(()=> {
-    dispatch(fetchProjectById(id))
-  },[id])
+  useEffect(() => {
+    dispatch(fetchProjectById(id));
+  }, [id, dispatch]);
 
   return (
     <>
-      <div className="mt-5 lg:px-4 over">
-        <div className="lg:flex gap-5 justify-between pb-4 text-left">
-          <ScrollArea className="h-screen lg:w-[69%] pr-2">
-            <div className="text-gray-400 pb-10 w-full">
-              <h1 className="text-lg font-semibold pb-5">
-                {project.projectDetails?.name}
-              </h1>
-              <div className="space-y-5 pb-10">
-                <p className="w-full md:max-w-lg lg:max-w-xl text-sm">
-                {project.projectDetails?.description}
+      <div className="mt-10 lg:px-10 px-5">
+        <div className="flex justify-center gap-10 flex-col lg:flex-row">
+          {/* Main content area */}
+          <ScrollArea className="w-full max-w-screen mx-auto">
+            <div className="bg-white shadow-lg rounded-lg p-6 text-gray-700 space-y-6 text-left">
+              {/* Project Title */}
+              <div>
+                <h1 className="text-2xl font-semibold text-center text-gray-800 md:text-3xl">
+                  {project.projectDetails?.name}
+                </h1>
+              </div>
+              {/* Project Description */}
+              <div className="text-center">
+                <p className="text-sm text-gray-600 md:text-base">
+                  {project.projectDetails?.description}
                 </p>
-                <div className="flex">
-                  <p className="w-36">Project Lead :</p>
-                  <p>{project.projectDetails?.owner.fullName}</p>
+              </div>
+              {/* Project Information */}
+              <div className="space-y-4 mt-5">
+                <div className="flex justify-start items-center">
+                  <span className="font-semibold text-sm md:text-base w-36">Project Lead:</span>
+                  <span className="text-sm md:text-base">{project.projectDetails?.owner.fullName}</span>
                 </div>
-                <div className="flex gap-2">
-                  <p className="w-36">Members :</p>
-                  <div className="flex items-center gap-2">
+                {/* Team Members */}
+                <div className="flex justify-start items-center gap-3">
+                  <span className="font-semibold text-sm md:text-base w-36">Members:</span>
+                  <div className="flex items-center gap-3">
                     {project.projectDetails?.team.map((item) => (
-                      <Avatar className="cursor-pointer" key={item}>
-                        <AvatarFallback>{item.fullName[0]}</AvatarFallback>
+                      <Avatar
+                        className="cursor-pointer bg-gray-200"
+                        key={item}
+                      >
+                        <AvatarFallback className="text-gray-800">
+                          {item.fullName[0]}
+                        </AvatarFallback>
                       </Avatar>
                     ))}
                   </div>
                   <Dialog>
                     <DialogTrigger>
-                      <DialogClose>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={handleProjectInvitation}
-                        >
-                          <span>Invite</span>
-                          <PlusIcon className="w-3 h-3" />
-                        </Button>
-                      </DialogClose>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="flex items-center gap-1 text-sm md:text-base"
+                        onClick={handleProjectInvitation}
+                      >
+                        Invite
+                        <PlusIcon className="w-4 h-4 ml-1" />
+                      </Button>
                     </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>Invite User</DialogHeader>
+                    <DialogContent className="max-w-md">
+                      <DialogHeader className="text-lg font-semibold">
+                        Invite User
+                      </DialogHeader>
                       <InviteUserForm />
+                      <DialogClose />
                     </DialogContent>
                   </Dialog>
                 </div>
-                <div className="flex">
-                  <p className="w-36">Category :</p>
-                  <p>{project.projectDetails?.category}</p>
+                {/* Project Category */}
+                <div className="flex justify-start items-center">
+                  <span className="font-semibold text-sm md:text-base w-36">Category:</span>
+                  <span className="text-gray-600 text-sm md:text-base">
+                    {project.projectDetails?.category}
+                  </span>
                 </div>
-                <div className="flex">
-                  <p className="w-36">Project Lead :</p>
-                  <Badge>{project.projectDetails?.owner.fullName}</Badge>
+                {/* Project Lead Badge */}
+                <div className="flex justify-start items-center">
+                  <span className="font-semibold text-sm md:text-base w-36">Project Lead:</span>
+                  <Badge className="bg-blue-100 text-blue-600 font-medium text-sm md:text-base">
+                    {project.projectDetails?.owner.fullName}
+                  </Badge>
                 </div>
               </div>
+              {/* Tasks Section */}
               <section>
-                <p className="py-5 border-b text-lg -tracking-wider">Tasks</p>
-                <div className="lg:flex md:flex gap-3 justify-between py-5">
-                  <IssueList status="pending" title="Todo List" />
-                  <IssueList status="in_progress" title="in_progress" />
-                  <IssueList status="done" title="Done" />
+                <p className="py-5 border-b-2 border-gray-200 text-lg font-semibold tracking-wide text-center">
+                  Tasks
+                </p>
+                <div className="flex flex-wrap justify-center gap-6 py-6">
+                  {/* Issue List for Todo, In Progress, Done */}
+                  <div className="flex-1 min-w-[300px]">
+                    <IssueList status="pending" title="Todo List" />
+                  </div>
+                  <div className="flex-1 min-w-[300px]">
+                    <IssueList status="in_progress" title="In Progress" />
+                  </div>
+                  <div className="flex-1 min-w-[300px]">
+                    <IssueList status="done" title="Done" />
+                  </div>
                 </div>
               </section>
             </div>
           </ScrollArea>
-          <div className="lg:w-[30%] rounded-md sticky right-5 top-10">
+          {/* ChatBox Section */}
+          <div>
             <ChatBox />
           </div>
         </div>

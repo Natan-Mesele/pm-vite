@@ -16,6 +16,7 @@ export const fetchProjects =
     }
   };
 
+
   export const searchProjects = (keyword) => async (dispatch) => {
     dispatch({ type: SEARCH_PROJECT_REQUEST });
     try {
@@ -38,17 +39,25 @@ export const fetchProjects =
     }
   };
 
-  export const createProject = (projectData) => async (dispatch) => {
+  export const createProject = (projectData) => async (dispatch, getState) => {
     dispatch({ type: CREATE_PROJECT_REQUEST });
+  
+    const { auth } = getState(); 
+    const token = auth.jwt; 
+  
     try {
-      const { data } = await api.post("/api/projects", projectData);
+      const { data } = await api.post("/api/projects", projectData, {
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
+      });
       console.log("create projects", data);
       dispatch({ type: CREATE_PROJECT_SUCCESS, project: data });
-      
     } catch (error) {
-      console.log("error", error);
+      console.log("Error creating project:", error);
     }
   };
+  
   
   export const deleteProject = ({projectId}) => async (dispatch) => {
     dispatch({ type: DELETE_PROJECT_REQUEST });

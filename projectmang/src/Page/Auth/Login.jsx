@@ -5,9 +5,11 @@ import { Input } from "@/components/ui/input";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const form = useForm({
     defaultValues: {
       email: "",
@@ -18,7 +20,9 @@ function Login() {
   const onSubmit = (data) => {
     dispatch(login(data))
     console.log("login project data", data);
+    navigate('/home')
   };
+
   return (
     <div>
        <Form {...form}>

@@ -41,9 +41,9 @@ function CreateProjectForm() {
   });
 
   const onSubmit = (data) => {
-    dispatch(createProject(data))
-    console.log("create project data", data);
-  };
+    console.log("Form data submitted:", data);
+    dispatch(createProject(data));  // Dispatch the action to create the project
+  };  
   
   return (
     <div>

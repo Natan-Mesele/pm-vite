@@ -26,6 +26,7 @@ function Signup() {
     dispatch(register(data));
     console.log("create project data", data);
   };
+  
   return (
     <div className="space-y-5 text-left">
       <h1>Register</h1>

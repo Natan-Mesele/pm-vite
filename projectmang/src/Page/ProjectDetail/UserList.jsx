@@ -5,7 +5,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function UserList({issueDetails}) {
-  const {project} = useSelector(store=> store)
+  const project = useSelector((state) => state.project);
   const dispatch = useDispatch()
   const handleAssignIssueToUser = (userId)=> {
     dispatch(assignedUserToIssue({issueId: issueDetails.id, userId}))

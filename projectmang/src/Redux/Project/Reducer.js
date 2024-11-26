@@ -18,6 +18,7 @@ const initialState = {
   error: null,
   projectDetails: null,
   searchProjects: [],
+  totalPages: 5,
 };
 
 export const projectReducer = (state = initialState, action) => {
@@ -34,13 +35,14 @@ export const projectReducer = (state = initialState, action) => {
         error: null,
       };
 
-    case FETCH_PROJECTS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        projects: action.projects,
-        error: null,
-      };
+      case FETCH_PROJECTS_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          projects: Array.isArray(action.projects) ? action.projects : [],
+          totalPages: action.totalPages, // Save totalPages from API response
+          error: null,
+        };
 
     case SEARCH_PROJECT_SUCCESS:
       return {
@@ -53,10 +55,10 @@ export const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        projects: [...state.projects, action.project],
+        projects: [...state.projects, action.project], // Add the new project to the existing list
         error: null,
       };
-      
+
     case FETCH_PROJECT_BY_ID_SUCCESS:
       return {
         ...state,
@@ -73,7 +75,7 @@ export const projectReducer = (state = initialState, action) => {
         ),
         error: null,
       };
-      
+
     default:
       return state;
   }
